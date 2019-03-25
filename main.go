@@ -4,6 +4,7 @@ import (
 	"bufio"
 	"context"
 	"fmt"
+	"log"
 	"os"
 	"strings"
 
@@ -55,7 +56,7 @@ func main() {
 	//Opening file and getting names
 	file, err := os.Open("file.txt")
 	if err != nil {
-		fmt.Println(err)
+		log.Fatal(err)
 	}
 
 	scanner := bufio.NewScanner(file)
@@ -74,7 +75,7 @@ func main() {
 
 		releases, _, err := client.Repositories.ListReleases(ctx, individual[0], individual[1], opt)
 		if err != nil {
-			panic(err) // is this really a good way?
+			log.Fatal(err)
 		}
 
 		minVersion := semver.New(minVal)
